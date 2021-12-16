@@ -6,27 +6,34 @@ let Template = GenerateHTML.createTemplate()
 
 let document = Template.document
 let profiles = document.getElementById("team-profiles")
+let Manager;
 
 const TeamMember = async () => {
-    let Type = Profile.askForTeamMember()
+    let Type = await Profile.askForTeamMember()
 
     switch(Type) {
         case "Manager":
-            let ManagerInfo = await Profile.askForManager()
+            Manager = await Profile.askForManager()
+            GenerateHTML.addManager(document, profiles, Manager)
+            TeamMember()
         break;
 
         case "Engineer":
-            let EngineerInfo = await Profile.askForEngineer()
+            let Engineer = await Profile.askForEngineer()
+            GenerateHTML.addEngineer(document, profiles, Engineer)
+            TeamMember()
         break;
 
         case "Intern":
-            let InternInfo = await Profile.askForIntern()
+            let Intern = await Profile.askForIntern()
+            GenerateHTML.addIntern(document, profiles, Intern)
+            TeamMember()
         break;
 
         case "Complete":
-
+            GenerateHTML.writeHTML(Template.dom, Manager)
         break;
     }
 }
 
-fs.writeFileSync(`./dist/${Emily.getName()}-${Emily.getOfficeNumber()}.html`, Template.dom.serialize())
+TeamMember()

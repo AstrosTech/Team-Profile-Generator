@@ -20,7 +20,7 @@ module.exports.addManager = (document, Profiles, Manager) => {
     CardHeaderH1.textContent = Manager.getName()
 
     let CardHeaderH5 = document.createElement("h5")
-    CardHeaderH5.textContent = Manager.getRole()
+    CardHeaderH5.textContent = `☕ ${Manager.getRole()}`
 
     CardHeader.appendChild(CardHeaderH1)
     CardHeader.appendChild(CardHeaderH5)
@@ -65,7 +65,7 @@ module.exports.addEngineer = (document, Profiles, Engineer) => {
     CardHeaderH1.textContent = Engineer.getName()
 
     let CardHeaderH5 = document.createElement("h5")
-    CardHeaderH5.textContent = Engineer.getRole()
+    CardHeaderH5.textContent = `👓 ${Engineer.getRole()}`
 
     CardHeader.appendChild(CardHeaderH1)
     CardHeader.appendChild(CardHeaderH5)
@@ -110,7 +110,7 @@ module.exports.addIntern = (document, Profiles, Intern) => {
     CardHeaderH1.textContent = Intern.getName()
 
     let CardHeaderH5 = document.createElement("h5")
-    CardHeaderH5.textContent = Intern.getRole()
+    CardHeaderH5.textContent = `📖 ${Intern.getRole()}`
 
     CardHeader.appendChild(CardHeaderH1)
     CardHeader.appendChild(CardHeaderH5)
@@ -142,4 +142,13 @@ module.exports.addIntern = (document, Profiles, Intern) => {
 
     Profiles.appendChild(CardDiv)
     return Profiles
+}
+
+
+module.exports.writeHTML = async (dom, Manager) => {
+    if(!Manager) return console.log("You must provide a manager. Please try again.")
+
+
+    fs.writeFileSync(`./dist/${Manager.getName()}-${Manager.getOfficeNumber()}.html`, dom.serialize())
+    console.log("Successfully Generated Team Page")
 }
