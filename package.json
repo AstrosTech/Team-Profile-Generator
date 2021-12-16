@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/AstrosTech/Team-Profile-Generator#readme",
   "dependencies": {
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.0",
+    "jsdom": "^16.7.0"
   },
   "devDependencies": {
     "jest": "^27.4.5"
